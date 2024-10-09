@@ -59,6 +59,16 @@ public class Step : MonoBehaviour
     /// </summary>
     public UnityEvent OnFailureCallback;
 
+    /// <summary>
+    /// Event triggered when step starts
+    /// </summary>
+    public UnityEvent OnStartupCallback;
+
+    /// <summary>
+    /// Event triggered when step ends
+    /// </summary>
+    public UnityEvent OnTeardownCallback;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +79,16 @@ public class Step : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Startup()
+    {
+        OnStartupCallback.Invoke();
+    }
+
+    public void Teardown()
+    {
+        OnTeardownCallback.Invoke();
     }
 
     /// <summary>

@@ -52,6 +52,10 @@ public class StepInspector : Editor
     /// </summary>
     SerializedProperty onFailureCallback;
 
+    SerializedProperty onStartupCallback;
+
+    SerializedProperty onTeardownCallback;
+
     /// <summary>
     /// Boolean to control foldout that hides TMPro components of the panel
     /// </summary>
@@ -69,6 +73,8 @@ public class StepInspector : Editor
         /** Callbacks, events **/
         onSuccessCallback = serializedObject.FindProperty("OnSuccessCallback");
         onFailureCallback = serializedObject.FindProperty("OnFailureCallback");
+        onStartupCallback = serializedObject.FindProperty("OnStartupCallback");
+        onTeardownCallback = serializedObject.FindProperty("OnTeardownCallback");
     }
 
     /// <summary>
@@ -103,13 +109,22 @@ public class StepInspector : Editor
 
         EditorGUILayout.Space(MEDIUM_VERTICAL_SPACE);
 
+        /** Startup Events **/
+        GUIContent onStartupCallbackContent = new GUIContent("On Startup Events", "Functions to execute when step starts");
+        EditorGUILayout.PropertyField(onStartupCallback, onStartupCallbackContent);
+        EditorGUILayout.Space(MEDIUM_VERTICAL_SPACE);
+
+        /** Teardown Events **/
+        GUIContent onTeardownCallbackContent = new GUIContent("On Teardown Events", "Functions to execute when step ends");
+        EditorGUILayout.PropertyField(onTeardownCallback, onTeardownCallbackContent);
+        EditorGUILayout.Space(MEDIUM_VERTICAL_SPACE);
+
         /** Success Event **/
         GUIContent onCompleteCallbackContent = new GUIContent("On Success Events", "Functions to execute when step is successfully completed");
         EditorGUILayout.PropertyField(onSuccessCallback, onCompleteCallbackContent);
         EditorGUILayout.Space(MEDIUM_VERTICAL_SPACE);
 
         /** Failure Event **/
-        EditorGUILayout.Space(SMALL_VERTICAL_SPACE);
         GUIContent onFailureCallbackContent = new GUIContent("On Failure Events", "Functions to execute when step fails");
         EditorGUILayout.PropertyField(onFailureCallback, onFailureCallbackContent);
         EditorGUILayout.Space(MEDIUM_VERTICAL_SPACE);
